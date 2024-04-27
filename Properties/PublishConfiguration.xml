@@ -1,0 +1,50 @@
+﻿<Publish>
+	<!--如果要更新模组，MODId需要被设置。首次上传时不需要-->
+	<ModId Value="" />
+	
+	<!--模组平台上展示的 模组名称-->
+	<DisplayName Value="示例模组" />
+	
+	<!--短描述-->
+	<ShortDescription Value="示例模组的描述" />
+	
+	<!--长描述，可使用MD格式，请勿缩进-->
+	<LongDescription>
+# 示例模组
+这是一个示例模组
+
+## 功能
+- a
+- b
+- c
+	</LongDescription>
+	
+	<!--缩略图-->
+	<Thumbnail Value="Properties/Thumbnail.png" />
+	
+	<!--截图展示，可设置多个-->
+	<Screenshot Value="" />
+	
+	<!--标签，可设置多个-->
+	<Tag Value="Code Mod" />
+	
+	<!--pdx论坛链接-->
+	<ForumLink Value="" />
+	
+	<!--版本-->
+	<ModVersion Value="1.0" />
+	
+	<!--兼容的游戏版本-->
+	<GameVersion Value="1.1.*" />
+	
+	<!--模组依赖-->
+	<Dependency Id="78903" />
+	
+	<!--更新日志，支持MD格式-->
+	<ChangeLog Value="更新日志" />
+	<!--ChangeLog-->
+	<!--/ChangeLog-->
+	
+	<!--额外链接. 支持：discord, github, youtube, twitch, x, paypal, patreon，可设置多个-->
+	<ExternalLink Type="discord" Url="https://discord.gg/UkKAfRqfCn" />
+</Publish>

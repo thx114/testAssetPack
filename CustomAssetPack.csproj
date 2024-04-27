@@ -1,0 +1,89 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Library</OutputType>
+        <TargetFramework>net472</TargetFramework>
+        <Configurations>Debug;Release</Configurations>
+
+        <!--Game.dll的目录. 默认不需要填，除非编译时没找到你的游戏目录，一般是 \Cities Skylines II\Cities2_Data\Managed -->
+        <CustomManagedPath></CustomManagedPath>
+
+        <!--存放 PDX 账号的文本文件， 在上传模组时需要-->
+        <!--将其放置在项目外部，以免意外提交或共享-->
+        <!--该文件应包含两行文本：-->
+        <!--$账号邮箱$-->
+        <!--$密码$-->
+        <PDXAccountDataPath>$(USERPROFILE)\Desktop\pdx_account.txt</PDXAccountDataPath>
+
+        <!--用于在 PDX mods 上发布模组所需的模组信息 文件-->
+        <PublishConfigurationPath>Properties\PublishConfiguration.xml</PublishConfigurationPath>
+
+        <AdditionalFilesDirectory>Resources</AdditionalFilesDirectory>
+
+        <AssemblyVersion>1.0.0</AssemblyVersion>
+
+        <FileVersion>1.0.0</FileVersion>
+    </PropertyGroup>
+    
+    <!--导入必须位于 PropertyGroup 块之后,一般不需要修改-->
+    <Import Project="$([System.Environment]::GetEnvironmentVariable('CSII_TOOLPATH', 'EnvironmentVariableTarget.User'))\Mod.props"/>
+    <Import Project="$([System.Environment]::GetEnvironmentVariable('CSII_TOOLPATH', 'EnvironmentVariableTarget.User'))\Mod.targets"/>
+
+    <ItemGroup>
+        <Reference Include="Game">
+            <Private>false</Private>
+        </Reference>
+        <Reference Include="Colossal.Core">
+            <Private>false</Private>
+        </Reference>
+        <Reference Include="Colossal.Logging">
+            <Private>false</Private>
+        </Reference>
+        <Reference Include="Colossal.IO.AssetDatabase">
+            <Private>false</Private>
+        </Reference>
+        <Reference Include="UnityEngine.CoreModule">
+            <Private>false</Private>
+        </Reference>
+        <Reference Include="Unity.Burst">
+            <Private>false</Private>
+        </Reference>
+        <Reference Include="Unity.Collections">
+            <Private>false</Private>
+        </Reference>
+        <Reference Include="Unity.Entities">
+            <Private>false</Private>
+        </Reference>
+        <Reference Include="Unity.Mathematics">
+            <Private>false</Private>
+        </Reference>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Reference Update="System">
+            <Private>false</Private>
+        </Reference>
+        <Reference Update="System.Core">
+            <Private>false</Private>
+        </Reference>
+        <Reference Update="System.Data">
+            <Private>false</Private>
+        </Reference>
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Include="$(ModPropsFile)" Link="Properties\Mod.props"/>
+        <None Include="$(ModTargetsFile)" Link="Properties\Mod.targets"/>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Resources\assets\ExamplePack\" />
+    </ItemGroup>
+
+    <Target Name="GetAdditionalFiles" AfterTargets="DeployWIP">
+        <ItemGroup>
+            <AdditionalFilesToDeploy Include="$(AdditionalFilesDirectory)\**\*.*" />
+        </ItemGroup>
+        <Copy SourceFiles="@(AdditionalFilesToDeploy)" DestinationFiles="@(AdditionalFilesToDeploy->'$(DeployDir)\%(RecursiveDir)%(Filename)%(Extension)')" />
+    </Target>
+</Project>
